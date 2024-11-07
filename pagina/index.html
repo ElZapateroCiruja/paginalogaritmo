@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Función Logarítmica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rozha+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css"> <!-- Vinculando el archivo CSS -->
+</head>
+<body>
+    <h1>Explora la Función Logarítmica</h1>
+    <h3>Se permiten únicamente parámetros NÚMERICOS.</h3>
+    <form id="logForm">
+        <label for="a">Valor de a (base del logaritmo, ≠ 1):</label>
+        <small class="notita">nota: se permiten fracciones, usa el formato num/den</small>
+        <input type="text" id="a" required>
+       
+        <label for="b">Valor de b (base del logaritmo, > 0 y ≠ 1):</label>
+        <small  class="notita">nota: se permiten fracciones, usa el formato num/den</small>
+        <input type="text" id="b" required>
+       
+        <label for="c">Valor de c (desplazamiento vertical):</label>
+        <small  class="notita">nota: se permiten fracciones, usa el formato num/den</small>
+        <input type="text" id="c" required>
+       
+        <label for="k">Valor de k (no puede ser igual a 0):</label>
+        <small  class="notita">nota: se permiten fracciones, usa el formato num/den</small>
+        <input type="text" id="k" required>
+       
+        <button type="submit">Calcular</button>
+        <button type="button" id="clearBtn">Borrar Datos</button>
+    </form>
+
+    <canvas id="logChart" width="600" height="400"></canvas>
+   
+    <div id="result">
+        <h2>Resultados:</h2>
+        <div class="result-item">
+            <span class="result-label">Raíz:</span>
+            <span class="result-value" id="raizValue"></span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">Ordenada al origen:</span>
+            <span class="result-value" id="ordenadaValue"></span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">Asintota:</span>
+            <span class="result-value" id="asintotaValue"></span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">Dominio:</span>
+            <span class="result-value" id="dominioValue"></span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">Imagen:</span>
+            <span class="result-value">Todos los números reales</span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">Par ordenado en la raíz:</span>
+            <span class="result-value" id="parOrdenadoValue"></span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">Tipo de función:</span>
+            <span class="result-value" id="funcionTipo"></span>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="scripts.js"></script> <!-- Vinculando el archivo JS -->
+</body>
+</html>

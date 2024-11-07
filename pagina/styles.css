@@ -1,0 +1,108 @@
+body {
+    font-family: 'Rozha One', serif;
+    margin: 0;
+    padding: 40px;
+    background-image: url('pagina.jpg'); /* Cambia esta ruta por la de tu imagen */
+    background-size: cover;
+    background-position: center;
+    color: #bf1818cf;
+    text-align: center;
+}
+
+h1 {
+    color: #bf1818cf; /* Rojo claro */
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+form {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con algo de transparencia */
+    border-radius: 10px;
+    padding: 25px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+label {
+    display: block;
+    margin: 15px 0 8px;
+    font-weight: bold;
+    color: #5d5d5d;
+}
+
+input {
+    width: 90%;
+    padding: 12px;
+    margin: 8px 0 20px;
+    border: 1px solid #b0b0b0;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+    border-color: #bf1818cf;
+    box-shadow: 0 0 8px rgba(255, 99, 71, 0.2);
+    outline: none;
+}
+
+button {
+    background-color: #bf1818cf;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #00a3e0;
+    transform: scale(1.05);
+}
+
+#result {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 30px auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.result-label {
+    font-weight: bold;
+    color: #bf1818cf;
+}
+
+.result-value {
+    color: #333;
+}
+
+canvas {
+    margin-top: 30px;
+    background-color: #fff;
+    border: 2px solid #b0b0b0;
+    border-radius: 6px;
+}
+
+.notita {
+    color: black;
+    font-size: 15px;
+}
