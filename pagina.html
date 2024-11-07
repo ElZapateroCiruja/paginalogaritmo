@@ -110,7 +110,7 @@
         <small class="notita">nota: se permiten fracciones, usa el formato num/den</small>
         <input type="text" id="a" required>
        
-        <label for="b">Valor de b (base del logaritmo, > 0 y ≠ 1 y ≠ 1):</label>
+        <label for="b">Valor de b (base del logaritmo, > 0 y ≠ 1):</label>
         <small  class="notita">nota: se permiten fracciones, usa el formato num/den</small>
         <input type="text" id="b" required>
        
@@ -194,11 +194,15 @@
                 return;
             }
 
-            // Calcular valores y mostrar resultados
-            const raiz = a > 0 ? Math.pow(b, (0 - k) / a) + c : null;
+            // Cálculo de la raíz de la función logarítmica
+            let raiz = null;
+            if (a !== 0) {
+                // Calculamos la raíz, que es el valor de x cuando la función se iguala a 0
+                raiz = (Math.pow(b, -k / a)) + c; // Esto es una aproximación del valor de la raíz
+            }
             const ordenada = c;
             const dominio = `( ${c.toFixed(2)}, +∞ )`;
-            const parOrdenado = `(${raiz ? raiz.toFixed(2) : "no definido"}, 0)`;
+            const parOrdenado = `(${raiz !== null ? raiz.toFixed(2) : "no definido"}, 0)`;
             const asintota = `x = ${-b}`;
             const funcionTipo = a > 0 ? "Creciente" : "Decreciente"; // Determinar si es creciente o decreciente
 
@@ -208,7 +212,7 @@
             document.getElementById('asintotaValue').textContent = asintota;
             document.getElementById('dominioValue').textContent = dominio;
             document.getElementById('parOrdenadoValue').textContent = parOrdenado;
-            document.getElementById('funcionTipo').textContent = funcionTipo; // Mostrar si es creciente o decreciente
+            document.getElementById('funcionTipo').textContent = funcionTipo;
        
             // Crear gráfico
             const ctx = document.getElementById('logChart').getContext('2d');
