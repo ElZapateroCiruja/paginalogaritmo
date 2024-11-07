@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Función Logarítmica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rozha+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Rozha One', serif;
+            margin: 0;
+            padding: 40px;
+            background-image: url('pagina.jpg'); /* Cambia esta ruta por la de tu imagen */
+            background-size: cover; /* Ajusta el tamaño de la imagen */
+            background-position: center; /* Centra la imagen */
+            color: #bf1818cf;
+            text-align: center;
+        }
+        h1 {
+            color: #bf1818cf; /* Rojo claro */
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+        form {
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con algo de transparencia */
+            border-radius: 10px;
+            padding: 25px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        label {
+            display: block;
+            margin: 15px 0 8px;
+            font-weight: bold;
+            color: #5d5d5d;
+        }
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 8px 0 20px;
+            border: 1px solid #b0b0b0;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #333;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input:focus {
+            border-color: #bf1818cf; /* Rojo claro */
+            box-shadow: 0 0 8px rgba(255, 99, 71, 0.2);
+            outline: none;
+        }
+        button {
+            background-color: #bf1818cf; /* Rojo claro */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-right: 10px; /* Espacio entre los botones */
+        }
+        button:hover {
+            background-color: #00a3e0; /* Un celeste más oscuro */
+            transform: scale(1.05);
+        }
+        #result {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 30px auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0; /* Línea divisoria */
+        }
+        .result-item:last-child {
+            border-bottom: none; /* Quitar la línea en el último item */
+        }
+        .result-label {
+            font-weight: bold;
+            color: #bf1818cf; /* Rojo claro */
+        }
+        .result-value {
+            color: #333; /* Color del valor */
+        }
+        canvas {
+            margin-top: 30px;
+            background-color: #fff; /* Fondo blanco para el gráfico */
+            border: 2px solid #b0b0b0;
+            border-radius: 6px;
+        }
+        .notita{ color:black; font: size 15px;}
+    </style>
+    <!-- Agregar el plugin de anotaciones de Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Explora la Función Logarítmica</h1>
+    <h3>Se permiten únicamente parámetros NÚMERICOS.</h3>
+    <form id="logForm">
+        <label for="a">Valor de a (base del logaritmo, ≠ 1):</label>
+        <small class="notita">nota: se permiten fracciones, usa el formato num/den</small>
+        <input type="text" id="a" required>
+       
+        <label for="b">Valor de b (base del logaritmo, > 0 y ≠ 1 y ≠ 1):</label>
+        <small  class="notita">nota: se permiten fracciones, usa el formato num/den</small>
+        <input type="text" id="b" required>
+       
+        <label for="c">Valor de c (desplazamiento vertical):</label>
+        <small  class="notita">nota: se permiten fracciones, usa el formato num/den</small>
+        <input type="text" id="c" required>
+       
+        <label for="k">Valor de k (no puede ser igual a 0):</label>
+        <small  class="notita">nota: se permiten fracciones, usa el formato num/den</small>
+        <input type="text" id="k" required>
+       
+        <button type="submit">Calcular</button>
+        <button type="button" id="clearBtn">Borrar Datos</button>
+    </form>
+
+    <canvas id="logChart" width="600" height="400"></canvas>
+   
+    <div id="result">
+        <h2>Resultados:</h2>
+        <div class="result-item">
+            <span class="result-label">Raíz:</span>
+            <span class="result-value" id="raizValue"></span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">Ordenada al origen:</span>
+            <span class="result-value" id="ordenadaValue"></span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">Asintota:</span>
+            <span class="result-value" id="asintotaValue"></span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">Dominio:</span>
+            <span class="result-value" id="dominioValue"></span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">Imagen:</span>
+            <span class="result-value">Todos los números reales</span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">Par ordenado en la raíz:</span>
+            <span class="result-value" id="parOrdenadoValue"></span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">Tipo de función:</span>
+            <span class="result-value" id="funcionTipo"></span>
+        </div>
+    </div>
+
+    <script>
+        let logChart = null; // Variable para almacenar el gráfico
+
+        // Función para convertir una fracción a número
+        function parseFraction(input) {
+            if (input.includes("/")) {
+                let [numerator, denominator] = input.split("/").map(Number); // Separar el numerador y el denominador
+                if (denominator === 0) {
+                    alert("El denominador no puede ser cero.");
+                    return NaN;
+                }
+                return numerator / denominator;
+            }
+            return parseFloat(input);
+        }
+
+        document.getElementById('logForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+       
+            const a = parseFraction(document.getElementById('a').value);
+            const b = parseFraction(document.getElementById('b').value);
+            const c = parseFraction(document.getElementById('c').value);
+            const k = parseFraction(document.getElementById('k').value);
+       
+            if (isNaN(a) || isNaN(b) || isNaN(c) || isNaN(k)) {
+                alert("Por favor ingrese valores válidos.");
+                return;
+            }
+
+            if (b <= 0 || b === 1) {
+                alert("El valor de 'b' debe ser mayor que 0 y no puede ser igual a 1.");
+                return;
+            }
+
+            // Calcular valores y mostrar resultados
+            const raiz = a > 0 ? Math.pow(b, (0 - k) / a) + c : null;
+            const ordenada = c;
+            const dominio = `( ${c.toFixed(2)}, +∞ )`;
+            const parOrdenado = `(${raiz ? raiz.toFixed(2) : "no definido"}, 0)`;
+            const asintota = `x = ${-b}`;
+            const funcionTipo = a > 0 ? "Creciente" : "Decreciente"; // Determinar si es creciente o decreciente
+
+            // Mostrar resultados
+            document.getElementById('raizValue').textContent = raiz !== null ? raiz.toFixed(2) : "No definida";
+            document.getElementById('ordenadaValue').textContent = ordenada.toFixed(2);
+            document.getElementById('asintotaValue').textContent = asintota;
+            document.getElementById('dominioValue').textContent = dominio;
+            document.getElementById('parOrdenadoValue').textContent = parOrdenado;
+            document.getElementById('funcionTipo').textContent = funcionTipo; // Mostrar si es creciente o decreciente
+       
+            // Crear gráfico
+            const ctx = document.getElementById('logChart').getContext('2d');
+            const xValues = [];
+            const yValues = [];
+            const asintotaX = -b; // Valor de la asíntota
+   
+            for (let x = 0.1; x <= 50; x += 0.1) { 
+                const y = a * Math.log(x, b) + c;
+                xValues.push(x);
+                yValues.push(y);
+            }
+       
+            if (logChart) {
+                logChart.destroy(); // Eliminar el gráfico anterior si existe
+            }
+       
+            logChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        label: 'Función Logarítmica',
+                        data: yValues,
+                        borderColor: '#bf1818cf',
+                        backgroundColor: 'rgba(255, 99, 71, 0.2)',
+                        borderWidth: 2,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            beginAtZero: false,
+                            ticks: {
+                                stepSize: 5
+                            }
+                        },
+                        y: {
+                            min: Math.min(...yValues) - 2,
+                            max: Math.max(...yValues) + 2,
+                            ticks: {
+                                stepSize: 5
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return 'y = ' + tooltipItem.raw.toFixed(2);
+                                }
+                            }
+                        },
+                        annotation: {
+                            annotations: [{
+                                type: 'line',
+                                xMin: asintotaX,
+                                xMax: asintotaX,
+                                borderColor: '#ff6347', // Rojo
+                                borderWidth: 2,
+                                label: {
+                                    content: `Asintota x = ${asintotaX}`,
+                                    enabled: true,
+                                    position: "top"
+                                }
+                            }]
+                        }
+                    }
+                }
+            });
+        });
+
+        document.getElementById('clearBtn').addEventListener('click', function() {
+            document.getElementById('logForm').reset();
+            document.getElementById('raizValue').textContent = '';
+            document.getElementById('ordenadaValue').textContent = '';
+            document.getElementById('asintotaValue').textContent = '';
+            document.getElementById('dominioValue').textContent = '';
+            document.getElementById('parOrdenadoValue').textContent = '';
+            document.getElementById('funcionTipo').textContent = ''; // Limpiar tipo de función
+            if (logChart) {
+                logChart.destroy(); // Borrar el gráfico
+            }
+        });
+    </script>
+</body>
+</html>
